@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "425012014642",
+    "project_id": "my-personal-chef-82b75",
+    "storage_bucket": "my-personal-chef-82b75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425012014642:android:bf55124b5d9a8f3260562b",
+        "android_client_info": {
+          "package_name": "com.akashrajoria.my_personal_chef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425012014642-r4da9vi97idknnvuammlqu50csoln26q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQcZd4SVJprMFmQrc8yc4D1_VbzvhKiNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425012014642-r4da9vi97idknnvuammlqu50csoln26q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
