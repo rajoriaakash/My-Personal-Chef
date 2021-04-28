@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.akashrajoria.my_personal_chef">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
         android:label="my_personal_chef"
         android:icon="@mipmap/ic_launcher">
