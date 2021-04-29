@@ -144,7 +144,7 @@ class _SignInState extends State<SignIn> {
                           dynamic result = await _auth.signinwithemailandpassword(email, password);
                           if(result==null){
                             setState(() {
-                              error = 'Could not Sign In \n Please supply a valid email';
+                              error = 'Could not Sign In \n Please supply valid Credentials';
                             });
 
                           }

@@ -3,3 +3,7 @@ class Userc{
 
   Userc({this.uid});
 }
+
+class UserData{
+
+}
