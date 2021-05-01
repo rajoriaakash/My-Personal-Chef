@@ -20,7 +20,7 @@ class Meal{
   Future<void> getRecipe(MealName) async{
    var tempRec =  Uri.parse('https://www.themealdb.com/api/json/v1/1/search.php?s=$MealName');
    http.Response response = await http.get(tempRec);
-   print(response);
+   // print(response);
    Map data = jsonDecode(response.body);
    print(data);
    Name = data['meals'][0]['strMeal'];
@@ -28,9 +28,24 @@ class Meal{
    Recipe = data['meals'][0]['strInstructions'];
    imgUrl = data['meals'][0]['strMealThumb'];
    Area = data['meals'][0]['strArea'];
-   vidUrl =data['meals'][0]['strYouTube'];
+   vidUrl =data['meals'][0]['strYoutube'];
+   print(imgUrl);
+   print(vidUrl);
    // print(data['meals'][0].keys);
    // print(data['meals'][0].containsKey('strIngredient'));
 
   }
+
+  Future<void> getRandomRecipe() async{
+    var tempRec = Uri.parse('https://www.themealdb.com/api/json/v1/1/random.php');
+    http.Response response = await http.get(tempRec);
+    Map data = jsonDecode(response.body);
+    Name = data['meals'][0]['strMeal'];
+    Type = data['meals'][0]['strCategory'];
+    Recipe = data['meals'][0]['strInstructions'];
+    imgUrl = data['meals'][0]['strMealThumb'];
+    Area = data['meals'][0]['strArea'];
+    vidUrl =data['meals'][0]['strYoutube'];
+
+}
 }

@@ -1,14 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:my_personal_chef/Models/recipemodel.dart';
+import 'package:my_personal_chef/Screens/Home/youtubeplayer.dart';
 
 class RecipeCard extends StatelessWidget {
-  final String Name;
-  final String Category;
-  final String imgUrl;
-  final String Recipe;
+  // final String Name;
+  // final String Category;
+  // final String imgUrl;
+  // final String Recipe;
+  final RecipeModel recipeModel ;
 
-  const RecipeCard({Key key, this.Name, this.Category, this.imgUrl, this.Recipe}) : super(key: key);
+  const RecipeCard({Key key, this.recipeModel}) : super(key: key);
+
+  // const RecipeCard({Key key, this.Name, this.Category, this.imgUrl, this.Recipe}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,7 @@ class RecipeCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    Name,
+                    recipeModel.Name,
                     style: TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
@@ -32,7 +37,7 @@ class RecipeCard extends StatelessWidget {
                   ),
                   Divider(height: 20.0,),
                   Text(
-                      "Category:  $Category",
+                      "Category: "+ recipeModel.Type,
                     style: TextStyle(
                       fontSize: 15.0,
                     ),
@@ -42,18 +47,28 @@ class RecipeCard extends StatelessWidget {
                     child: CircleAvatar(
                       radius: 100.0,
                       backgroundImage: NetworkImage(
-                          imgUrl,
+                          recipeModel.imgUrl,
                       ),
                     ),
                   ),
                   Divider(height: 10.0,),
                   SizedBox(height: 5.0,),
                   Text(
-                      Recipe,
+                      recipeModel.Recipe,
                     style: TextStyle(
                       fontSize: 20.0,
                     ),
-                  )
+                  ),
+                  Divider(height: 20.0,),
+                  Text(
+                      "Recipe Video",
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 10.0,),
+                  Player(url: recipeModel.vidUrl,)
                 ],
               ),
             ),
