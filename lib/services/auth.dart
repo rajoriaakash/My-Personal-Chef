@@ -9,7 +9,9 @@ class AuthService{
 
   //creating a user object from firebase user
   Userc _userfromFirebaseUser (User user) {
+    print(user.uid);
    return user!=null ? Userc(uid: user.uid) : null;
+
   }
   //auth change user stream
   Stream <Userc> get user{

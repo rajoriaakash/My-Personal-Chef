@@ -3,17 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_personal_chef/Models/recipemodel.dart';
 import 'package:my_personal_chef/Screens/Home/youtubeplayer.dart';
+import 'dart:math';
 
-class RecipeCard extends StatelessWidget {
+class RecipeCard extends StatefulWidget {
   // final String Name;
   // final String Category;
   // final String imgUrl;
   // final String Recipe;
   final RecipeModel recipeModel ;
 
-  const RecipeCard({Key key, this.recipeModel}) : super(key: key);
+   RecipeCard({Key key, this.recipeModel,}) : super(key: key);
 
-  // const RecipeCard({Key key, this.Name, this.Category, this.imgUrl, this.Recipe}) : super(key: key);
+  @override
+  _RecipeCardState createState() => _RecipeCardState();
+}
+
+class _RecipeCardState extends State<RecipeCard> {
+  bool _hasbeenpressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,32 +35,70 @@ class RecipeCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    recipeModel.Name,
+                    widget.recipeModel.Name,
                     style: TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Divider(height: 20.0,),
-                  Text(
-                      "Category: "+ recipeModel.Type,
-                    style: TextStyle(
-                      fontSize: 15.0,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CircleAvatar(
-                      radius: 100.0,
-                      backgroundImage: NetworkImage(
-                          recipeModel.imgUrl,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Category: "+ widget.recipeModel.Type,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
                       ),
-                    ),
+                      Text('|',
+                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),
+                      ),
+                      Text(
+                        "Area: "+ widget.recipeModel.Area,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height:10.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircleAvatar(
+                          radius: 100.0,
+                          backgroundImage: NetworkImage(
+                            widget.recipeModel.imgUrl,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.bookmark),
+                        iconSize: 50.0,
+                        color: _hasbeenpressed? Colors.red : Colors.red.withOpacity(0.5),
+                        onPressed: () {
+                          setState(() {
+                            _hasbeenpressed = !_hasbeenpressed;
+                            print(_hasbeenpressed);
+                            if(_hasbeenpressed==true){
+                              print("add to favourite");
+                            }
+                            else{
+                              print("Remove from favourites");
+                            }
+                          });
+
+                        },
+                      ),
+                    ],
                   ),
                   Divider(height: 10.0,),
                   SizedBox(height: 5.0,),
                   Text(
-                      recipeModel.Recipe,
+                      widget.recipeModel.Recipe,
                     style: TextStyle(
                       fontSize: 20.0,
                     ),
@@ -68,7 +112,23 @@ class RecipeCard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10.0,),
-                  Player(url: recipeModel.vidUrl,)
+                  TextButton.icon(
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: ((c)=>Player(url: widget.recipeModel.vidUrl,))));
+                    },
+                    icon: Icon(
+                        Icons.play_arrow_rounded,
+                      color: Colors.black,
+                    ),
+                    label: Text(
+                        'Click here',
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+
                 ],
               ),
             ),

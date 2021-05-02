@@ -13,9 +13,9 @@ class Meal{
   String Area;
   String imgUrl;
   String vidUrl;
-  // List<String> ingredients;
+  String recId;
   final RecipeModel recipeModel ;
-  Meal({this.recipeModel,this.MealName,this.Recipe,this.Type,this.imgUrl,this.Name,this.Area,this.vidUrl});
+  Meal({this.recipeModel,this.MealName,this.Recipe,this.Type,this.imgUrl,this.Name,this.Area,this.vidUrl,this.recId});
 
   Future<void> getRecipe(MealName) async{
    var tempRec =  Uri.parse('https://www.themealdb.com/api/json/v1/1/search.php?s=$MealName');
@@ -29,10 +29,8 @@ class Meal{
    imgUrl = data['meals'][0]['strMealThumb'];
    Area = data['meals'][0]['strArea'];
    vidUrl =data['meals'][0]['strYoutube'];
-   print(imgUrl);
-   print(vidUrl);
-   // print(data['meals'][0].keys);
-   // print(data['meals'][0].containsKey('strIngredient'));
+   recId =data['meals'][0]['strId'];
+
 
   }
 
@@ -46,6 +44,7 @@ class Meal{
     imgUrl = data['meals'][0]['strMealThumb'];
     Area = data['meals'][0]['strArea'];
     vidUrl =data['meals'][0]['strYoutube'];
+    recId =data['meals'][0]['strId'];
 
 }
 }
