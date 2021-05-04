@@ -21,5 +21,7 @@ class Lists{
     'Hot Chocolate Fudge','Hot and Sour Soup','Home-made Mandazi','Honey Yogurt Cheesecake','Irish stew','Jam Roly-Poly','Japanese gohan rice',
     'Japanese Katsudon','Kentucky Fried Chicken','Katsu Chicken curry','Key Lime Pie','Kidney Bean Curry','Kafteji','Krispy Kreme Donut',
     'Koshari','Lasagne','Leblebi Soup','Lamb Tzatziki Burgers', ];
+
+
+   List FavouriteRecipes = [];
 }
-//'','','','','','','','','','','','','','','',''

@@ -6,19 +6,61 @@ import 'package:my_personal_chef/services/auth.dart';
 
 class DatabaseService{
 
-  RecipeModel recipeModel = RecipeModel();
   String userId;
+  DatabaseService({this.userId});
 
-  DatabaseService({this.recipeModel,this.userId});
+  final CollectionReference userCollection =FirebaseFirestore.instance.collection('users');
 
-  final CollectionReference recipeCollection =FirebaseFirestore.instance.collection('recipes');
+  // AuthService authService = AuthService();
 
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  //
+  // final FirebaseAuth auth = FirebaseAuth.instance;
+  //
+  // Future<String> getUserbyId() async{
+  //   final User user = await auth.currentUser;
+  //    return userId = user.uid;
+  // }
 
-  Future<void> getUserbyId() async{
-    final User user = auth.currentUser;
-    final uid = user.uid;
-
+  Future addUser( Userc userc ) async{
+    return await userCollection.doc(userId).set({
+      'Name' : userc.Name,
+      'Email' : userc.Email,
+      'FavList' : [],
+    });
   }
+
+  Future addFav (String userId, List favList) async{
+    return await userCollection.doc(userId).set({
+      'FavList' : favList,
+    });
+  }
+  // DocumentReference doc_ref= userCollection.document();
+  //
+  // Future<String> get_data(DocumentReference doc_ref) async {
+  //   DocumentSnapshot docSnap = await doc_ref.get();
+  //   var doc_id2 = docSnap.reference.documentID;
+  //   return doc_id2;
+  // }
+
+// //To retrieve the string
+//   String documentID = await get_data();
+
+  Future addToFav({String userId, String recipeName}) async {
+    return await userCollection.doc(userId).update({
+      'FavList' : FieldValue.arrayUnion([recipeName])
+    });
+  }
+
+  Future removeFromFav({String userId, String recipeName}) async {
+    return await userCollection.doc(userId ).update({
+      'FavList' : FieldValue.arrayRemove([recipeName])
+    });
+  }
+
+
+  //get stream from firestore
+  // Stream<QuerySnapshot> get users{
+  //   return userCollection.snapshots();
+  // }
 
 }

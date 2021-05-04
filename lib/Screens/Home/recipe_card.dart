@@ -1,18 +1,30 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_personal_chef/Models/recipemodel.dart';
+import 'package:my_personal_chef/Screens/Home/fav_tile.dart';
 import 'package:my_personal_chef/Screens/Home/youtubeplayer.dart';
+import 'package:my_personal_chef/services/auth.dart';
 import 'dart:math';
+
+import 'package:my_personal_chef/services/database.dart';
+import 'package:my_personal_chef/shared/lists.dart';
 
 class RecipeCard extends StatefulWidget {
   // final String Name;
   // final String Category;
   // final String imgUrl;
   // final String Recipe;
-  final RecipeModel recipeModel ;
 
-   RecipeCard({Key key, this.recipeModel,}) : super(key: key);
+
+  final RecipeModel recipeModel ;
+   DatabaseService databaseService ;
+  AuthService authService = AuthService();
+
+  // List FavouriteList =[];
+
+   RecipeCard({Key key, this.recipeModel}) : super(key: key);
 
   @override
   _RecipeCardState createState() => _RecipeCardState();
@@ -76,21 +88,23 @@ class _RecipeCardState extends State<RecipeCard> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.bookmark),
+                        icon: Icon(Icons.favorite_outlined),
                         iconSize: 50.0,
                         color: _hasbeenpressed? Colors.red : Colors.red.withOpacity(0.5),
-                        onPressed: () {
-                          setState(() {
+                        onPressed: ()  async {
+                              setState(() {
                             _hasbeenpressed = !_hasbeenpressed;
+                              });
                             print(_hasbeenpressed);
                             if(_hasbeenpressed==true){
+                                 await DatabaseService().addToFav(userId: widget.authService.getUserbyId(), recipeName: widget.recipeModel.Name);
                               print("add to favourite");
                             }
                             else{
+                                await DatabaseService().removeFromFav(userId: widget.authService.getUserbyId(), recipeName: widget.recipeModel.Name);
                               print("Remove from favourites");
                             }
-                          });
-
+                          // print(Lists().FavouriteRecipes);
                         },
                       ),
                     ],

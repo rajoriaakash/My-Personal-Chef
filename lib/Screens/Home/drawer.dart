@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_personal_chef/Screens/Home/contactus.dart';
+import 'package:my_personal_chef/Screens/Home/fav_list.dart';
 import 'package:my_personal_chef/Screens/Home/home.dart';
+import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
   final _key = GlobalKey<ScaffoldState>();
@@ -27,6 +29,9 @@ class AppDrawer extends StatelessWidget {
                   ),
                   ListTile(
                     title: Text('Favourites'),
+                    // onTap: (){
+                    //   Navigator.push(context, MaterialPageRoute(builder: (c)=>Fav_List()));
+                    // },
                   ),
                   ListTile(
                     onTap: (){

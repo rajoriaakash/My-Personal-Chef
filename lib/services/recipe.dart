@@ -29,7 +29,7 @@ class Meal{
    imgUrl = data['meals'][0]['strMealThumb'];
    Area = data['meals'][0]['strArea'];
    vidUrl =data['meals'][0]['strYoutube'];
-   recId =data['meals'][0]['strId'];
+   recId =data['meals'][0]['idMeal'];
 
 
   }
@@ -44,7 +44,7 @@ class Meal{
     imgUrl = data['meals'][0]['strMealThumb'];
     Area = data['meals'][0]['strArea'];
     vidUrl =data['meals'][0]['strYoutube'];
-    recId =data['meals'][0]['strId'];
+    recId =data['meals'][0]['idMeal'];
 
 }
 }

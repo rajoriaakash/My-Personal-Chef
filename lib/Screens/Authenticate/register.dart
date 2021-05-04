@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_personal_chef/services/auth.dart';
+import 'package:my_personal_chef/services/database.dart';
 import 'signin.dart';
 
 class Register extends StatefulWidget {
@@ -21,6 +22,7 @@ class _RegisterState extends State<Register> {
   String password = '';
   String error = '';
   String name = '';
+  bool _hasbeenpressed = false;
   bool hidePass = true;
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class _RegisterState extends State<Register> {
                   widget.Toggle();
                 },
                 icon: Icon(
-                  Icons.person_add,
+                  Icons.person,
                   color: Colors.black,
                 ),
                 label: Text(
@@ -165,10 +167,13 @@ class _RegisterState extends State<Register> {
                           ),
                           trailing: IconButton(
                               focusColor: Colors.red,
-                              icon: Icon(Icons.remove_red_eye),
+                              icon: Icon(Icons.remove_red_eye,
+                                color: _hasbeenpressed? Colors.red : Colors.grey,
+                              ),
                               onPressed: () {
                                 setState(() {
                                   hidePass = !hidePass;
+                                  _hasbeenpressed = !_hasbeenpressed;
                                 });
                               },
                           ),
@@ -207,6 +212,9 @@ class _RegisterState extends State<Register> {
                             elevation: 0.5,
                           ),
                           onPressed: ()async{
+                            setState(() {
+
+                            });
                             if(_formkey.currentState.validate()){
                               dynamic result = await _auth.registerwithemailandpassword(email, password);
                               if(result==null){

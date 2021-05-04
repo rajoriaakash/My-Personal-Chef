@@ -20,6 +20,8 @@ class _SignInState extends State<SignIn> {
   String email = '';
   String password = '';
   String error = '';
+  String error2 = '';
+  bool _hasbeenpressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class _SignInState extends State<SignIn> {
                   widget.Toggle();
                   },
                 icon: Icon(
-                  Icons.person_add,
+                  Icons.person_add_alt_1,
                   color: Colors.white,
                 ),
                 label: Text(
@@ -127,10 +129,13 @@ class _SignInState extends State<SignIn> {
                       ),
                       trailing: IconButton(
                           focusColor: Colors.red,
-                          icon: Icon(Icons.remove_red_eye),
+                          icon: Icon(Icons.remove_red_eye,
+                            color: _hasbeenpressed? Colors.red : Colors.grey,
+                          ),
                           onPressed: () {
                             setState(() {
                               hidePass = !hidePass;
+                              _hasbeenpressed =!_hasbeenpressed;
                             });
                           }),
                     ),
@@ -166,7 +171,37 @@ class _SignInState extends State<SignIn> {
                         color: Colors.red,
                         fontSize: 20.0
                     ),
-                  )
+                  ),
+                  InkWell(
+                    onTap: () async{
+                       dynamic result = await _auth.signinanon();
+                       if(result==null){
+                         setState(() {
+                            error2 = 'Could not Sign In';
+                         });
+                       }
+                    },
+                    child: ListTile(
+                      leading: Icon(Icons.person_outline_rounded),
+                      tileColor: Colors.red,
+                      title: Text(
+                        'Sign In as a Guest',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15.0
+                        ),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    error2,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 20.0
+                    ),
+                  ),
                 ],
               ),
             ),
