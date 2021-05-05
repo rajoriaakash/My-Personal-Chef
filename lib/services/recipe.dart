@@ -22,7 +22,7 @@ class Meal{
    http.Response response = await http.get(tempRec);
    // print(response);
    Map data = jsonDecode(response.body);
-   print(data);
+   // print(data);
    Name = data['meals'][0]['strMeal'];
    Type = data['meals'][0]['strCategory'];
    Recipe = data['meals'][0]['strInstructions'];
@@ -47,4 +47,13 @@ class Meal{
     recId =data['meals'][0]['idMeal'];
 
 }
+  void setIntoModel(RecipeModel recipeModel, Meal meal) {
+    recipeModel.Name = meal.Name;
+    recipeModel.Type = meal.Type;
+    recipeModel.Area = meal.Area;
+    recipeModel.imgUrl = meal.imgUrl;
+    recipeModel.Recipe = meal.Recipe;
+    recipeModel.vidUrl = meal.vidUrl;
+    recipeModel.id = meal.recId;
+  }
 }

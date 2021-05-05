@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:my_personal_chef/Models/user.dart';
+import 'package:my_personal_chef/Screens/Authenticate/register.dart';
 import 'package:my_personal_chef/Screens/Home/contactus.dart';
 import 'package:my_personal_chef/Screens/Home/fav_list.dart';
 import 'package:my_personal_chef/Screens/Home/home.dart';
+import 'package:my_personal_chef/services/database.dart';
 import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -14,7 +18,11 @@ class AppDrawer extends StatelessWidget {
       child: InkWell(
           child: ListView(
             children: [
-              UserAccountsDrawerHeader(accountName: Text('User'), accountEmail:Text('Email')),
+              UserAccountsDrawerHeader(
+                  accountName: Text(Userc().Name??'Loading Name..'
+                  ),
+                  accountEmail:Text(Userc().Email?? 'Loading Email..'
+                  )),
               Column(
                 children: [
                   ListTile(
@@ -29,9 +37,9 @@ class AppDrawer extends StatelessWidget {
                   ),
                   ListTile(
                     title: Text('Favourites'),
-                    // onTap: (){
-                    //   Navigator.push(context, MaterialPageRoute(builder: (c)=>Fav_List()));
-                    // },
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=>FavList()));
+                    },
                   ),
                   ListTile(
                     onTap: (){

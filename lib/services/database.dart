@@ -29,11 +29,11 @@ class DatabaseService{
     });
   }
 
-  Future addFav (String userId, List favList) async{
-    return await userCollection.doc(userId).set({
-      'FavList' : favList,
-    });
-  }
+  // Future addFav (String userId, List favList) async{
+  //   return await userCollection.doc(userId).set({
+  //     'FavList' : favList,
+  //   });
+  // }
   // DocumentReference doc_ref= userCollection.document();
   //
   // Future<String> get_data(DocumentReference doc_ref) async {
@@ -62,5 +62,9 @@ class DatabaseService{
   // Stream<QuerySnapshot> get users{
   //   return userCollection.snapshots();
   // }
+  //Get stream of Favourite List
+  Stream<DocumentSnapshot> get FavList{
+    return userCollection.doc(userId).snapshots();
+  }
 
 }

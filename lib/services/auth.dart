@@ -12,7 +12,7 @@ class AuthService{
   //creating a user object from firebase user
   Userc _userfromFirebaseUser (User user) {
     print(user.uid);
-   return user!=null ? Userc(uid: user.uid, Email: user.email,) : null;
+   return user!=null ? Userc(uid: user.uid, Email: user.email) : null;
 
   }
 
@@ -49,15 +49,15 @@ class AuthService{
       print(e.toString());
     }
   }
-  //register with email and password
-  Future registerwithemailandpassword(String email, String password)async{
+
+  Future SignUp(String email, String password,String name) async{
     try{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       final User user = result.user;
 
       uid = user.uid;
       print(uid);
-      await DatabaseService(userId: uid).addUser(_userfromFirebaseUser(user));
+      await DatabaseService(userId: uid).addUser(Userc(uid: uid,Email: email,Name: name));
       return _userfromFirebaseUser(user);
 
     }
@@ -66,6 +66,10 @@ class AuthService{
       return null;
     }
   }
+  //register with email and password
+  // Future registerwithemailandpassword(String email, String password)async{
+  //
+  // }
 
   String getUserbyId() {
     return  _auth.currentUser.uid;

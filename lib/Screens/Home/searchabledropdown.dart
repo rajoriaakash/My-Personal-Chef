@@ -44,13 +44,14 @@ class _SearchDropDownState extends State<SearchDropDown> {
                   loading = true;
                 });
                 await object.getRecipe(val);
-                recipeModel.Name = object.Name;
-                recipeModel.Type = object.Type;
-                recipeModel.Area = object.Area;
-                recipeModel.imgUrl = object.imgUrl;
-                recipeModel.Recipe = object.Recipe;
-                recipeModel.vidUrl = object.vidUrl;
-                recipeModel.id = object.recId;
+                object.setIntoModel(recipeModel, object);
+                // recipeModel.Name = object.Name;
+                // recipeModel.Type = object.Type;
+                // recipeModel.Area = object.Area;
+                // recipeModel.imgUrl = object.imgUrl;
+                // recipeModel.Recipe = object.Recipe;
+                // recipeModel.vidUrl = object.vidUrl;
+                // recipeModel.id = object.recId;
 
                 Navigator.push(context,MaterialPageRoute(builder: (c)=> RecipeCard(recipeModel: recipeModel,)));
               }

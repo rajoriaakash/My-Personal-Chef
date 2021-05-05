@@ -54,13 +54,7 @@ class _RandomRecipeCardState extends State<RandomRecipeCard> {
             loading = true;
           });
           await object.getRandomRecipe();
-          recipeModel.Name = object.Name;
-          recipeModel.Type = object.Type;
-          recipeModel.Area = object.Area;
-          recipeModel.imgUrl = object.imgUrl;
-          recipeModel.Recipe = object.Recipe;
-          recipeModel.vidUrl = object.vidUrl;
-          recipeModel.id = object.recId;
+          object.setIntoModel(recipeModel, object);
 
           Navigator.push(context,MaterialPageRoute(builder: (c)=> RecipeCard(recipeModel: recipeModel,)));
         },

@@ -216,7 +216,7 @@ class _RegisterState extends State<Register> {
 
                             });
                             if(_formkey.currentState.validate()){
-                              dynamic result = await _auth.registerwithemailandpassword(email, password);
+                              dynamic result = await _auth.SignUp(email, password, name);
                               if(result==null){
                                 setState(() {
                                   error = 'Could not Register \n Please supply a valid email';
