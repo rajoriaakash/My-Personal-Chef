@@ -8,16 +8,14 @@ class Fav_Tile extends StatelessWidget {
   final String recipeName;
   RecipeModel recipeModel = RecipeModel();
   Meal object = Meal();
-  Fav_Tile({this.recipeName})async {
-    await object.getRecipe(recipeName);
-    await object.setIntoModel(recipeModel, object);
+  Fav_Tile({this.recipeName}) {
+    // await object.getRecipe(recipeName);
+    // await object.setIntoModel(recipeModel, object);
   }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (c)=>RecipeCard(recipeModel: recipeModel)));
-      },
       child: Card(
         child: ListTile(
           leading: CircleAvatar(
@@ -32,6 +30,9 @@ class Fav_Tile extends StatelessWidget {
           )
         ),
       ),
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (c)=>RecipeCard(recipeModel: recipeModel)));
+      },
     );
   }
 }

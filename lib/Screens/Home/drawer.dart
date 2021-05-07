@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
   final _key = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> _drawerkey = GlobalKey();

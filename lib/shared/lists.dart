@@ -20,8 +20,27 @@ class Lists{
     'Fish fofos','Garides Saganaki','Grilled Mac and Cheese Sandwich',"General Tso's Chicken",'Gigantes Plaki','Gołąbki (cabbage roll)',
     'Hot Chocolate Fudge','Hot and Sour Soup','Home-made Mandazi','Honey Yogurt Cheesecake','Irish stew','Jam Roly-Poly','Japanese gohan rice',
     'Japanese Katsudon','Kentucky Fried Chicken','Katsu Chicken curry','Key Lime Pie','Kidney Bean Curry','Kafteji','Krispy Kreme Donut',
-    'Koshari','Lasagne','Leblebi Soup','Lamb Tzatziki Burgers', ];
+    'Koshari','Lasagne','Leblebi Soup','Lamb Tzatziki Burgers', 'Mediterranean Pasta Salad','Massaman Beef curry', 'Mushroom & Chestnut Rotolo',
+   ' Matar Paneer',' Minced Beef Pie', 'McSinghs Scotch pie', 'Madeira Cake', 'Montreal Smoked Meat', 'Ma Po Tofu', 'Mbuzi Choma (Roasted Goat)',
+    'Mince Pies', 'Moussaka', 'Mulukhiyah',' Mustard champ',' Moroccan Carrot Soup',' Mee goreng mamak','Nutty Chicken Curry', 'New York cheesecake',
+    ' Nanaimo Bars', 'Nasi lemak','Osso Buco alla Milanese',' Oxtail with broad beans','Pad See Ew', 'Potato Gratin with Chicken', 'Poutine',
+    'Pilchard puttanesca', 'Pork Cassoulet',' Pancakes', 'Pumpkin Pie', 'Peanut Butter Cheesecake', 'Peach & Blueberry Grunt',
+   ' Parkin Cake', 'Pear Tarte Tatin',' Provençal Omelette Cake', 'Prawn & Fennel Bisque', 'Pate Chinois',' Pouding chomeur',
+    'Peanut Butter Cookies', 'Pizza Express Margherita',' Paszteciki (Polish Pasties)',' Pierogi (Polish Dumplings)', 'Polskie Naleśniki (Polish Pancakes)',
+  '  Piri-piri chicken and slaw',' Portuguese prego with green piri-piri', 'Portuguese barbecued pork (Febras assadas)',' Portuguese fish stew (Caldeirada de peixe)',
+    'Portuguese custard tarts','Rigatoni with fennel sausage sauce', 'Rocky Road Fudge',' Recheado Masala Fish', 'Ribollita',' Roasted Eggplant With Tahini',
+   ' Pine Nuts', 'and Lentils', 'Rock Cakes',' Ratatouille',' Rappie Pie',' Red Peas Soup',' Roast fennel and aubergine paella',
+   ' Rosół (Polish Chicken Soup)', 'Rogaliki (Polish Croissant Cookies)',' Roti john','Spaghetti Bolognese', 'Spicy Arrabiata Penne', 'Smoky Lentil Chili with Squash',
+   ' Sticky Toffee Pudding Ultimate', 'Spicy North African Potato Salad', 'Stovetop Eggplant With Harissa',' Chickpeas',' and Cumin Yogurt', 'Salmon Prawn Risotto',
+    ' Salted Caramel Cheescake'', Seafood fideuà', 'Spinach & Ricotta Cannelloni', 'Squash linguine', 'Spanish Tortilla', 'Steak and Kidney Pie',
+   ' Sticky Toffee Pudding',' Spotted Dick',' Summer Pudding',' Summer Pistou',' Split Pea Soup', 'Sugar Pie', 'Steak Diane',' Saltfish and Ackee',
+  '  Sweet and Sour Pork', 'Szechuan Beef',' Shrimp Chow Fun', 'Salmon Avocado Salad', 'Salmon Eggs Eggs Benedict', 'Shakshuka', 'Smoked Haddock Kedgeree',
+    'Stamppot', 'Snert (Dutch Split Pea Soup)', 'Spaghetti alla Carbonara', 'Soy-Glazed Meatloaves with Wasabi Mashed Potatoes & Roasted Carrots',
+   ' Skillet Apple Pork Chops with Roasted Sweet Potatoes & Zucchini',' Strawberry Rhubarb Pie',' Stuffed Lamb Tomatoes', 'Sledz w Oleju (Polish Herrings)', 'Shawarma',
+   ' Spring onion and prawn empanadas', 'Seri muka kuih','Teriyaki Chicken Casserole', 'Tandoori chicken', 'Thai Green Curry',' Toad In The Hole',
+    'Turkey Meatloaf', 'Tuna Nicoise',' Tahini Lentils', 'Three Fish Pie',' Treacle Tart',' Tarte Tatin', 'Three-cheese souffles',
+    'Tourtiere', 'Timbits', 'Tunisian Orange Cake', 'Tunisian Lamb Soup',' Tuna and Egg Briks',' Tamiya, Tonkatsu pork','Vegan Lasagna',
+    'Vegan Chocolate Cake', 'Vietnamese Grilled Pork (bun-thit-nuong)',' Venetian Duck Ragu',' Vegetarian Casserole',' Vegetarian Chilli',
+    'Vegetable Shepherd’s Pie','White chocolate creme brulee',' Wontons','Yaki Udon'];
 
-
-   List FavouriteRecipes = [];
 }

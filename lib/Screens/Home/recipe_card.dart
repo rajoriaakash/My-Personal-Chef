@@ -12,6 +12,7 @@ import 'package:my_personal_chef/services/database.dart';
 import 'package:my_personal_chef/shared/lists.dart';
 
 class RecipeCard extends StatefulWidget {
+
   // final String Name;
   // final String Category;
   // final String imgUrl;
@@ -21,6 +22,7 @@ class RecipeCard extends StatefulWidget {
   final RecipeModel recipeModel ;
    DatabaseService databaseService ;
   AuthService authService = AuthService();
+
 
   // List FavouriteList =[];
 
@@ -33,8 +35,12 @@ class RecipeCard extends StatefulWidget {
 class _RecipeCardState extends State<RecipeCard> {
   bool _hasbeenpressed = false;
 
+
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+    var width = screenSize.width;
+    var height = screenSize.height;
     return SingleChildScrollView(
       child: Container(
         color: Colors.redAccent,
@@ -54,25 +60,28 @@ class _RecipeCardState extends State<RecipeCard> {
                     ),
                   ),
                   Divider(height: 20.0,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Category: "+ widget.recipeModel.Type,
-                        style: TextStyle(
-                          fontSize: 20.0,
+                  FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Category: "+ widget.recipeModel.Type + " ",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
                         ),
-                      ),
-                      Text('|',
-                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),
-                      ),
-                      Text(
-                        "Area: "+ widget.recipeModel.Area,
-                        style: TextStyle(
-                          fontSize: 20.0,
+                        Text('|',
+                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),
                         ),
-                      ),
-                    ],
+                        Text(
+                          " Area: "+ widget.recipeModel.Area,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(height:10.0),
                   Row(
