@@ -127,7 +127,7 @@ class _HomeState extends State<Home> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
-                        title: Text('Check out Recipes by Areas'),
+                        title: Text('Check out Recipes by Cuisines'),
                         subtitle: Text('Indian, Canadian, Chinese..'),
                         trailing: Icon(Icons.arrow_forward_ios_rounded),
                       ),

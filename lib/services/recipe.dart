@@ -38,6 +38,7 @@ class Meal{
     var tempRec = Uri.parse('https://www.themealdb.com/api/json/v1/1/random.php');
     http.Response response = await http.get(tempRec);
     Map data = jsonDecode(response.body);
+
     Name = data['meals'][0]['strMeal'];
     Type = data['meals'][0]['strCategory'];
     Recipe = data['meals'][0]['strInstructions'];

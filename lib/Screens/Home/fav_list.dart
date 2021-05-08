@@ -36,11 +36,28 @@ class _FavListState extends State<FavList> {
             print(recipeName);
           });
 
-          return ListView.builder(
-              itemCount: favList.length,
-              itemBuilder: (context,index) {
-                return Fav_Tile(recipeName: favList[index],);
-              }
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Favourites'),
+              centerTitle: true,
+            ),
+            body: favList.length==0 ? Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15.0,horizontal: 20.0),
+              child: Center(child: Text('Oops!\nNo Favorite Recipes currently..',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30.0,
+                ),
+              )),
+            ) : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                  itemCount: favList.length,
+                  itemBuilder: (context,index) {
+                    return Fav_Tile(recipeName: favList[index],);
+                  }
+              ),
+            ),
           );
         }
 

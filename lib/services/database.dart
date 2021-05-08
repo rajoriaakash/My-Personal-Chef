@@ -29,6 +29,15 @@ class DatabaseService{
     });
   }
 
+  Future updateUser( Userc userc ) async{
+    return await userCollection.doc(userId).set({
+      'Name' : userc.Name,
+      'Mobile Number': userc.MobNo,
+
+    });
+  }
+
+
   // Future addFav (String userId, List favList) async{
   //   return await userCollection.doc(userId).set({
   //     'FavList' : favList,
