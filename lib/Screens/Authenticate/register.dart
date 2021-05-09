@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_personal_chef/Screens/Authenticate/confirmEmail.dart';
 import 'package:my_personal_chef/services/auth.dart';
 import 'package:my_personal_chef/services/database.dart';
 import 'signin.dart';
@@ -24,6 +25,7 @@ class _RegisterState extends State<Register> {
   String name = '';
   bool _hasbeenpressed = false;
   bool hidePass = true;
+  String message = 'An account confirmation email has just been sent to your email';
   @override
   Widget build(BuildContext context) {
 
@@ -212,11 +214,9 @@ class _RegisterState extends State<Register> {
                             elevation: 0.5,
                           ),
                           onPressed: ()async{
-                            setState(() {
-
-                            });
                             if(_formkey.currentState.validate()){
                               dynamic result = await _auth.SignUp(email, password, name);
+                              Navigator.push(context, MaterialPageRoute(builder: (c)=>ConfirmEmail(message: message ,)));
                               if(result==null){
                                 setState(() {
                                   error = 'Could not Register \n Please supply a valid email';

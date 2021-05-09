@@ -25,12 +25,13 @@ class DatabaseService{
     return await userCollection.doc(userId).set({
       'Name' : userc.Name,
       'Email' : userc.Email,
+      'Mobile Number' : '',
       'FavList' : [],
     });
   }
 
   Future updateUser( Userc userc ) async{
-    return await userCollection.doc(userId).set({
+    return await userCollection.doc(userId).update({
       'Name' : userc.Name,
       'Mobile Number': userc.MobNo,
 

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_personal_chef/Models/user.dart';
+import 'package:my_personal_chef/Screens/Authenticate/confirmEmail.dart';
 import 'package:my_personal_chef/services/database.dart';
 
 class AuthService{
@@ -12,7 +13,7 @@ class AuthService{
   //creating a user object from firebase user
   Userc _userfromFirebaseUser (User user) {
     print(user.uid);
-   return user != null ? Userc(uid: user.uid, Email: user.email) : null;
+   return user !=null ? Userc(uid: user.uid, Email: user.email) : null;
 
   }
 
@@ -54,10 +55,14 @@ class AuthService{
     try{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       final User user = result.user;
+      await user.sendEmailVerification();
 
       uid = user.uid;
       print(uid);
       await DatabaseService(userId: uid).addUser(Userc(uid: uid,Email: email,Name: name));
+      // if(user.emailVerified){
+      //   Navigator.push(context, MaterialPageRoute(builder: (c)=>ConfirmEmail()));
+      // }
       return _userfromFirebaseUser(user);
 
     }
@@ -81,6 +86,16 @@ class AuthService{
     try{
       return await _auth.signOut();
     }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future passwordReset(String email)async {
+    try{
+      return await _auth.sendPasswordResetEmail(email: email);
+    }
+    catch(e){
       print(e.toString());
       return null;
     }

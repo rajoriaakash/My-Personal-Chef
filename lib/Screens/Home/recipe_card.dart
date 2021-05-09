@@ -41,118 +41,166 @@ class _RecipeCardState extends State<RecipeCard> {
     var screenSize = MediaQuery.of(context).size;
     var width = screenSize.width;
     var height = screenSize.height;
-    return SingleChildScrollView(
-      child: Container(
-        color: Colors.redAccent,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40.0,horizontal: 10.0),
-          child: Card(
-            color: Colors.redAccent[100],
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Text(
-                    widget.recipeModel.Name,
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
+    return Scrollbar(
+      isAlwaysShown: true,
+      thickness: 13,
+      radius: Radius.circular(10.0),
+      child: SingleChildScrollView(
+        child: Container(
+          color: Colors.redAccent,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 40.0,horizontal: 10.0),
+            child: Card(
+              color: Colors.redAccent[100],
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Text(
+                      widget.recipeModel.Name,
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Divider(height: 20.0,),
-                  FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: Row(
+                    Divider(height: 20.0,),
+                    FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Category: "+ widget.recipeModel.Type + " ",
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
+                          ),
+                          Text('|',
+                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),
+                          ),
+                          Text(
+                            " Area: "+ widget.recipeModel.Area,
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height:10.0),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Category: "+ widget.recipeModel.Type + " ",
-                          style: TextStyle(
-                            fontSize: 20.0,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircleAvatar(
+                            radius: 100.0,
+                            backgroundImage: NetworkImage(
+                              widget.recipeModel.imgUrl,
+                            ),
                           ),
                         ),
-                        Text('|',
-                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),
-                        ),
-                        Text(
-                          " Area: "+ widget.recipeModel.Area,
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
+                        IconButton(
+                          icon: Icon(Icons.favorite_outlined),
+                          iconSize: 50.0,
+                          color: _hasbeenpressed? Colors.red : Colors.red.withOpacity(0.5),
+                          onPressed: ()  async {
+                                setState(() {
+                              _hasbeenpressed = !_hasbeenpressed;
+                                });
+                              print(_hasbeenpressed);
+                              if(_hasbeenpressed==true){
+                                   await DatabaseService().addToFav(userId: widget.authService.getUserbyId(), recipeName: widget.recipeModel.Name);
+                                print("add to favourite");
+                              }
+                              else{
+                                  await DatabaseService().removeFromFav(userId: widget.authService.getUserbyId(), recipeName: widget.recipeModel.Name);
+                                print("Remove from favourites");
+                              }
+                            // print(Lists().FavouriteRecipes);
+                          },
                         ),
                       ],
                     ),
-                  ),
-                  SizedBox(height:10.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircleAvatar(
-                          radius: 100.0,
-                          backgroundImage: NetworkImage(
-                            widget.recipeModel.imgUrl,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.favorite_outlined),
-                        iconSize: 50.0,
-                        color: _hasbeenpressed? Colors.red : Colors.red.withOpacity(0.5),
-                        onPressed: ()  async {
-                              setState(() {
-                            _hasbeenpressed = !_hasbeenpressed;
-                              });
-                            print(_hasbeenpressed);
-                            if(_hasbeenpressed==true){
-                                 await DatabaseService().addToFav(userId: widget.authService.getUserbyId(), recipeName: widget.recipeModel.Name);
-                              print("add to favourite");
-                            }
-                            else{
-                                await DatabaseService().removeFromFav(userId: widget.authService.getUserbyId(), recipeName: widget.recipeModel.Name);
-                              print("Remove from favourites");
-                            }
-                          // print(Lists().FavouriteRecipes);
-                        },
-                      ),
-                    ],
-                  ),
-                  Divider(height: 10.0,),
-                  SizedBox(height: 5.0,),
-                  Text(
-                      widget.recipeModel.Recipe,
-                    style: TextStyle(
-                      fontSize: 20.0,
-                    ),
-                  ),
-                  Divider(height: 20.0,),
-                  Text(
-                      "Recipe Video",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 10.0,),
-                  TextButton.icon(
-                    onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: ((c)=>Player(url: widget.recipeModel.vidUrl,))));
-                    },
-                    icon: Icon(
-                        Icons.play_arrow_rounded,
-                      color: Colors.black,
-                    ),
-                    label: Text(
-                        'Click here',
+                    Text(
+                        "Ingredients",
                       style: TextStyle(
-                        fontSize: 15.0,
+                        fontSize: 23.0,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical:0.0),
+                      child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: widget.recipeModel.ingredients.length,
+                          itemBuilder: (context,index){
+                            return widget.recipeModel.ingredients[index].toString().isEmpty?
+                            null  :
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  widget.recipeModel.ingredients[index],
+                                  style: TextStyle(
+                                      fontSize: 18.0
+                                  ),
+                                ),
+                                Text( widget.recipeModel.measures[index],
+                                  style: TextStyle(
+                                      fontSize: 18.0
+                                  ),)
+                              ],
+                            );
+                          }
+                      ),
+                    ),
+                    Divider(height: 10.0,),
+                    SizedBox(height: 5.0,),
+                    Center(child: Text(
+                        "Instructions",
+                      style: TextStyle(
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Text(
+                        widget.recipeModel.Recipe,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    Divider(height: 20.0,),
+                    Text(
+                        "Recipe Video",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10.0,),
+                    TextButton.icon(
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: ((c)=>Player(url: widget.recipeModel.vidUrl,))));
+                      },
+                      icon: Icon(
+                          Icons.play_arrow_rounded,
                         color: Colors.black,
                       ),
+                      label: Text(
+                          'Click here',
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          color: Colors.black,
+                        ),
+                      ),
                     ),
-                  ),
 
-                ],
+                  ],
+                ),
               ),
             ),
           ),

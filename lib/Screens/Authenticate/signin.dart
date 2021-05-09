@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_personal_chef/Screens/Home/resetpassword.dart';
 import 'package:my_personal_chef/services/auth.dart';
 import 'register.dart';
 
@@ -142,6 +143,12 @@ class _SignInState extends State<SignIn> {
                   ),
                   SizedBox(
                     height: 20,
+                  ),
+                  ElevatedButton(
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=>ForgotPassword()));
+                    },
+                    child: Text("Forgot password"),
                   ),
                   ElevatedButton(
                       onPressed: ()async{
