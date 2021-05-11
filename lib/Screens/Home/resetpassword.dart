@@ -1,16 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:my_personal_chef/Screens/Authenticate/confirmEmail.dart';
+
+import 'package:my_personal_chef/Screens/Authenticate/signin.dart';
 import 'package:my_personal_chef/services/auth.dart';
 
-class ForgotPassword extends StatelessWidget {
+class ForgotPassword extends StatefulWidget {
   static String id = 'forgot-password';
+
+  @override
+  _ForgotPasswordState createState() => _ForgotPasswordState();
+}
+
+class _ForgotPasswordState extends State<ForgotPassword> {
   final _formKey = GlobalKey<FormState>();
+
   final AuthService _auth = AuthService();
+
   String email;
-  String message= 'A reset password link has just been sent to your email';
+
+  String message= '';
 
   @override
   Widget build(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 17,
+
+        ),
+      ),
+      backgroundColor: Colors.white,
+      behavior: SnackBarBehavior.floating,
+      padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20))),
+
+    );
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       body: Form(
@@ -51,17 +78,32 @@ class ForgotPassword extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20),
-                RaisedButton(
+                ElevatedButton(
                   child: Text('Send Email'),
                   onPressed: () async{
-                    await _auth.passwordReset(email);
-                    Navigator.push(context, MaterialPageRoute(builder: (c)=>ConfirmEmail(message: message,)));
+                    if(email.contains("@"+".") ){
+                      await _auth.passwordReset(email);
+                      setState(() {
+                        message = 'A reset password link has just been sent to your email';
+                      });
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                    else{
+                      setState(() {
+                        message = 'Please provide a valid email';
+                      });
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+
+                    // Navigator.push(context, MaterialPageRoute(builder: (c)=>ConfirmEmail(message: message,)));
 
                   },
                 ),
-                FlatButton(
+                TextButton(
                   child: Text('Sign In'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,MaterialPageRoute(builder: (c)=>SignIn()));
+                  },
                 )
               ],
             ),

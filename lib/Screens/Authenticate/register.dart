@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_personal_chef/Screens/Authenticate/confirmEmail.dart';
 import 'package:my_personal_chef/services/auth.dart';
 import 'package:my_personal_chef/services/database.dart';
 import 'signin.dart';
@@ -28,6 +27,23 @@ class _RegisterState extends State<Register> {
   String message = 'An account confirmation email has just been sent to your email';
   @override
   Widget build(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 17,
+
+        ),
+      ),
+      backgroundColor: Colors.white,
+      behavior: SnackBarBehavior.floating,
+      padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20))),
+
+    );
 
     return Scaffold(
         appBar: AppBar(
@@ -216,12 +232,12 @@ class _RegisterState extends State<Register> {
                           onPressed: ()async{
                             if(_formkey.currentState.validate()){
                               dynamic result = await _auth.SignUp(email, password, name);
-                              Navigator.push(context, MaterialPageRoute(builder: (c)=>ConfirmEmail(message: message ,)));
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               if(result==null){
                                 setState(() {
-                                  error = 'Could not Register \n Please supply a valid email';
+                                  message = 'Could not Register \n Please supply a valid email';
                                 });
-
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               }
                             }
                           },
@@ -235,14 +251,14 @@ class _RegisterState extends State<Register> {
 
                       ),
                       SizedBox(height: 30.0,),
-                      Text(
-                        error,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 20.0
-                        ),
-                      )
+                      // Text(
+                      //   error,
+                      //   textAlign: TextAlign.center,
+                      //   style: TextStyle(
+                      //     color: Colors.red,
+                      //     fontSize: 20.0
+                      //   ),
+                      // )
                     ],
                   ),
                 ),

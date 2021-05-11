@@ -34,7 +34,7 @@ class RecipeCard extends StatefulWidget {
 
 class _RecipeCardState extends State<RecipeCard> {
   bool _hasbeenpressed = false;
-
+  
 
   @override
   Widget build(BuildContext context) {
@@ -140,16 +140,20 @@ class _RecipeCardState extends State<RecipeCard> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  widget.recipeModel.ingredients[index],
-                                  style: TextStyle(
-                                      fontSize: 18.0
+                                Flexible(
+                                  child: Text(
+                                    widget.recipeModel.ingredients[index],
+                                    style: TextStyle(
+                                        fontSize: 18.0
+                                    ),
                                   ),
                                 ),
-                                Text( widget.recipeModel.measures[index],
-                                  style: TextStyle(
-                                      fontSize: 18.0
-                                  ),)
+                                Flexible(
+                                  child: Text( widget.recipeModel.measures[index],
+                                    style: TextStyle(
+                                        fontSize: 18.0
+                                    ),),
+                                )
                               ],
                             );
                           }

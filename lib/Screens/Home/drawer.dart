@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_personal_chef/Models/user.dart';
@@ -29,22 +31,38 @@ class AppDrawer extends StatelessWidget {
           var userDocument = snapshot.data;
           String Name = userDocument["Name"];
           String Email = userDocument["Email"];
+          String profileImage = userDocument["Profile Picture"];
           return Drawer(
             key: _drawerkey,
             child: InkWell(
                 child: ListView(
                   children: [
                     UserAccountsDrawerHeader(
-                      accountName: Name.isEmpty? Text(' Anonymous User ') : Text(
-                          Name,
-                        style: TextStyle(
-                          fontSize: 20.0,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: MemoryImage(base64Decode(profileImage)),
+                          fit: BoxFit.fill,
                         ),
                       ),
-                      accountEmail: Email.isEmpty? Text('') : Text(Email),
+                      // accountName: Name.isEmpty? Text(' Anonymous User ') : Text(
+                      //     Name,
+                      //   style: TextStyle(
+                      //     fontSize: 20.0,
+                      //   ),
+                      // ),
+                      // accountEmail: Email.isEmpty? Text('') : Text(Email),
                     ),
                     Column(
                       children: [
+                        ListTile(
+                          title: Name.isEmpty? Text(' Anonymous User ') : Text(
+                            Name,
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
+                          ),
+                          subtitle: Email.isEmpty? Text('') : Text(Email),
+                        ),
                         ListTile(
                           leading: Icon(Icons.home_rounded),
                           onTap: () {

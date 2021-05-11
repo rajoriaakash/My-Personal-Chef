@@ -1,8 +1,17 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_personal_chef/Models/user.dart';
+import 'package:my_personal_chef/Screens/Home/change_password.dart';
 import 'package:my_personal_chef/services/auth.dart';
 import 'package:my_personal_chef/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
+
+import 'package:my_personal_chef/services/image_converter.dart';
+import 'dart:convert';
+import 'dart:typed_data';
 
 class UpdateUser extends StatefulWidget {
 
@@ -17,6 +26,39 @@ class _UpdateUserState extends State<UpdateUser> {
   String mobNo ;
   String userId = AuthService().getUserbyId();
   final _formkey = GlobalKey<FormState>();
+  File image;
+  final picker = ImagePicker();
+  final converter = ImageConverter();
+  String profileString1;
+  String profileString2;
+
+  Future getImageByGallery() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        image = File(pickedFile.path);
+        Uint8List bytes = image.readAsBytesSync();
+        profileString1 = base64Encode(bytes);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future getImageByCamera() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        image = File(pickedFile.path);
+        Uint8List bytes = image.readAsBytesSync();
+        profileString1 = base64Encode(bytes);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -30,6 +72,8 @@ class _UpdateUserState extends State<UpdateUser> {
       var userDocument = snapshot.data;
       name = userDocument["Name"];
       mobNo = userDocument["Mobile Number"];
+      profileString2 = userDocument["Profile Picture"];
+
 
       return Scaffold(
         appBar: AppBar(
@@ -55,7 +99,10 @@ class _UpdateUserState extends State<UpdateUser> {
                   child: Column(
                     children: [
                       CircleAvatar(
-                        radius: 60.0,
+                        backgroundColor: Colors.black26,
+                        backgroundImage: image==null ? MemoryImage(base64Decode(profileString2)) : FileImage(File(image.path)),
+                        // backgroundImage: AssetImage('assets/category.jpg'),
+                        radius: 70.0,
                       ),
                       SizedBox(height: 20,),
                       Container(
@@ -110,7 +157,7 @@ class _UpdateUserState extends State<UpdateUser> {
                               mobNo = val;
                           },
                           validator: (val) =>
-                          val.isEmpty || (val.length!=10 ) ? 'Enter a Valid Mobile No.' : null,
+                           val.length!=10 ? 'Enter a Valid Mobile No.' : null,
                           textAlignVertical: TextAlignVertical.center,
                         ),
 
@@ -136,6 +183,7 @@ class _UpdateUserState extends State<UpdateUser> {
                               color: Colors.black,
                             ),
                             onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (c)=>ChangePassword()));
                             }
                         ),
                       ),
@@ -162,18 +210,24 @@ class _UpdateUserState extends State<UpdateUser> {
                                 print(name);
                                 print(mobNo);
                                 await DatabaseService(userId: userId).updateUser(
-                                    Userc(Name: name, MobNo: mobNo));
+                                    Userc(Name: name, MobNo: mobNo,ImageString: profileString1));
                                 Navigator.pop(context);
                               }
                             }
                         ),
                       ),
+
                     ],
                   ),
                 ),
               ),
             ),
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: getImageByGallery,
+          tooltip: 'Pick Image',
+          child: Icon(Icons.add_a_photo),
         ),
       );
     }
