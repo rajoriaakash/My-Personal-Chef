@@ -10,8 +10,7 @@ class AuthService{
 
   //creating a user object from firebase user
   Userc _userfromFirebaseUser (User user) {
-    print(user.uid);
-   return user !=null ? Userc(uid: user.uid, Email: user.email) : null;
+   return user !=null ? Userc(uid: getUserbyId(), Email: user.email) : null;
 
   }
 
@@ -25,8 +24,7 @@ class AuthService{
     try{UserCredential result =  await _auth.signInAnonymously();
     final User user = result.user;
 
-    uid = user.uid;
-    print(uid);
+    uid = getUserbyId();
     await DatabaseService(userId: uid).addUser(_userfromFirebaseUser(user));
 
     return _userfromFirebaseUser(user);
@@ -55,7 +53,7 @@ class AuthService{
       final User user = result.user;
       await user.sendEmailVerification();
 
-      uid = user.uid;
+      uid = getUserbyId();
       print(uid);
       await DatabaseService(userId: uid).addUser(Userc(uid: uid,Email: email,Name: name));
       // if(user.emailVerified){
