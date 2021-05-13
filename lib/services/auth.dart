@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:my_personal_chef/Models/user.dart';
 import 'package:my_personal_chef/services/database.dart';
 

@@ -2,15 +2,12 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:my_personal_chef/Models/user.dart';
-import 'package:my_personal_chef/Screens/Authenticate/register.dart';
 import 'package:my_personal_chef/Screens/Home/update_user.dart';
 import 'package:my_personal_chef/Screens/Home/contactus.dart';
 import 'package:my_personal_chef/Screens/Home/fav_list.dart';
 import 'package:my_personal_chef/Screens/Home/home.dart';
 import 'package:my_personal_chef/services/auth.dart';
-import 'package:my_personal_chef/services/database.dart';
-import 'package:provider/provider.dart';
+import 'package:my_personal_chef/shared/loading.dart';
 
 class AppDrawer extends StatelessWidget {
   final _key = GlobalKey<ScaffoldState>();
@@ -26,7 +23,7 @@ class AppDrawer extends StatelessWidget {
         .snapshots(),
         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return Text("Loading");
+            return Loading();
           }
           var userDocument = snapshot.data;
           String Name = userDocument["Name"];
@@ -55,44 +52,59 @@ class AppDrawer extends StatelessWidget {
                     Column(
                       children: [
                         ListTile(
-                          title: Name.isEmpty? Text(' Anonymous User ') : Text(
+                          title: Name==null? Text(' Anonymous User ') : Text(
                             Name,
                             style: TextStyle(
                               fontSize: 20.0,
                             ),
                           ),
-                          subtitle: Email.isEmpty? Text('') : Text(Email),
+                          subtitle: Email==null? Text('') : Text(Email),
                         ),
                         ListTile(
-                          leading: Icon(Icons.home_rounded),
+                          leading: Icon(Icons.home_rounded,color:Colors.grey[900]),
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (c) => Home()));
                           },
-                          trailing: Icon(Icons.arrow_forward_ios_rounded),
+                          trailing: Icon(Icons.arrow_forward_ios_rounded,color:Colors.grey[900]),
                           title: Text('Home'),
                         ),
-                        ListTile(
-                          leading: Icon(Icons.person_rounded),
+                        Email==null? ListTile(
+                          leading: Icon(
+                              Icons.person_rounded,
+                            color: Colors.grey,
+                          ),
+                          onTap: () {
+                          },
+                          trailing: Icon(Icons.arrow_forward_ios_rounded,
+                            color:Colors.grey[400]
+                          ),
+                          title: Text('My Account',
+                            style: TextStyle(
+                              color: Colors.grey
+                            ),
+                          ),
+                        ) :  ListTile(
+                          leading: Icon(Icons.person_rounded,color:Colors.grey[900]),
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (c) => UpdateUser()));
                           },
-                          trailing: Icon(Icons.arrow_forward_ios_rounded),
+                          trailing: Icon(Icons.arrow_forward_ios_rounded,color:Colors.grey[900]),
                           title: Text('My Account'),
                         ),
                         ListTile(
-                          leading: Icon(Icons.favorite_outlined),
+                          leading: Icon(Icons.favorite_outlined,color:Colors.grey[900]),
                           title: Text('Favourites'),
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (c) => FavList()));
                           },
-                          trailing: Icon(Icons.arrow_forward_ios_rounded),
+                          trailing: Icon(Icons.arrow_forward_ios_rounded,color:Colors.grey[900]),
                         ),
                         ListTile(
-                          leading: Icon(Icons.contact_support_rounded),
+                          leading: Icon(Icons.contact_support_rounded,color:Colors.grey[900]),
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (c) => ContactUs()));
                           },
-                          trailing: Icon(Icons.arrow_forward_ios_rounded),
+                          trailing: Icon(Icons.arrow_forward_ios_rounded,color:Colors.grey[900]),
                           title: Text('Contact Us'),
                         ),
 

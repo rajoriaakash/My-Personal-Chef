@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:my_personal_chef/services/auth.dart';
-import 'package:my_personal_chef/services/database.dart';
-import 'signin.dart';
+
 
 class Register extends StatefulWidget {
   final Function Toggle;

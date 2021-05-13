@@ -8,10 +8,10 @@ import 'package:my_personal_chef/services/auth.dart';
 import 'package:my_personal_chef/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:io';
-
-import 'package:my_personal_chef/services/image_converter.dart';
 import 'dart:convert';
-import 'dart:typed_data';
+
+import 'package:my_personal_chef/shared/loading.dart';
+
 
 class UpdateUser extends StatefulWidget {
 
@@ -28,7 +28,6 @@ class _UpdateUserState extends State<UpdateUser> {
   final _formkey = GlobalKey<FormState>();
   File image;
   final picker = ImagePicker();
-  final converter = ImageConverter();
   String profileString1;
   String profileString2;
 
@@ -67,7 +66,7 @@ class _UpdateUserState extends State<UpdateUser> {
         .snapshots(),
     builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
       if (!snapshot.hasData) {
-        return Text("Loading");
+        return Loading();
       }
       var userDocument = snapshot.data;
       name = userDocument["Name"];

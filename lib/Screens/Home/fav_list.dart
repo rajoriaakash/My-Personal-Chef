@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:my_personal_chef/Models/recipemodel.dart';
 import 'package:my_personal_chef/Screens/Home/fav_tile.dart';
 import 'package:my_personal_chef/services/recipe.dart';
-import 'package:provider/provider.dart';
-import 'package:my_personal_chef/services/database.dart';
 import'package:my_personal_chef/services/auth.dart';
 
 

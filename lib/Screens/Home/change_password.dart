@@ -97,7 +97,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      RaisedButton(
+                      ElevatedButton(
                         child: Text('Send Email'),
                         onPressed: () async {
                           if(email==emailOg){

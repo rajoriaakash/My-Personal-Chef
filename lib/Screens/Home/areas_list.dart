@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import  'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:async';
-import 'package:intl/intl.dart';
+
 import 'package:my_personal_chef/Screens/Home/recipes_by_area.dart';
-import 'package:my_personal_chef/Screens/Home/recipes_by_category.dart';
+
 import 'package:my_personal_chef/shared/earch_widget.dart';
 
 class AreaList extends StatefulWidget {
